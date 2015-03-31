@@ -1,0 +1,13 @@
+CLEAR_CONSOLE=true
+JAVACC_OPTIONS=-OUTPUT_DIRECTORY\=/Users/P0ppoff/Documents/Transfert/S6/AOO/Projet_LIPS/AOO-LVM/AOO-LVM/_generated/ricm/aoo/lvm
+JJDOC_OPTIONS=
+JJTREE_OPTIONS=
+JJ_NATURE=true
+JTB_OPTIONS=-ia -jd -tk
+KEEP_DEL_FILES_IN_HISTORY=false
+MARK_GEN_FILES_AS_DERIVED=true
+RUNTIME_JJJAR=/Applications/eclipse/plugins/sf.eclipse.javacc_1.5.30/jars/javacc-6.0.jar
+RUNTIME_JTBJAR=/Applications/eclipse/plugins/sf.eclipse.javacc_1.5.30/jars/jtb-1.4.9.jar
+RUNTIME_JVMOPTIONS=
+SUPPRESS_WARNINGS=false
+eclipse.preferences.version=1
