@@ -23,6 +23,11 @@ public class SCons implements SList {
 	}
 
 	@Override
+	public void eval() throws LVMException {
+		return; // TODO: make function
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder wString = new StringBuilder();
 

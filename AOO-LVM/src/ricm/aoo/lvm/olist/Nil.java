@@ -15,6 +15,11 @@ public class Nil extends Atom implements SList {
 	}
 
 	@Override
+	public void eval() throws LVMException {
+		return; // TODO: make function
+	}
+
+	@Override
 	public String toString() {
 		return new String("()");
 	}

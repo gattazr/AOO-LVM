@@ -18,6 +18,14 @@ public interface SExpr {
 	 */
 	public SExpr cdr() throws LVMException;
 
+	/**
+	 *
+	 * Evaluation de l'expression
+	 *
+	 * @throws LVMException
+	 */
+	public void eval() throws LVMException;
+
 	@Override
 	public String toString();
 

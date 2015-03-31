@@ -23,6 +23,11 @@ public class Symbol extends Atom {
 	}
 
 	@Override
+	public void eval() throws LVMException {
+		return; // TODO: make function
+	}
+
+	@Override
 	public String toString() {
 		return this.pSymbol.toString();
 	}

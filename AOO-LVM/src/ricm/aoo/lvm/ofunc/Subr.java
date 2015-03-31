@@ -5,6 +5,11 @@ import ricm.aoo.lvm.utils.LVMException;
 
 public abstract class Subr extends Primitive {
 
+	public Subr(String aString) {
+		super(aString);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public SExpr car() throws LVMException {
 		// TODO Auto-generated method stub
