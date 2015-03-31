@@ -1,5 +1,5 @@
 CLEAR_CONSOLE=true
-JAVACC_OPTIONS=-OUTPUT_DIRECTORY\=../../../../_generated/ricm/aoo/lvm
+JAVACC_OPTIONS=-OUTPUT_DIRECTORY\=../../../../../_generated/ricm/aoo/lvm
 JJDOC_OPTIONS=
 JJTREE_OPTIONS=
 JJ_NATURE=true
