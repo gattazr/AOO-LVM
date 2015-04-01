@@ -6,17 +6,17 @@ public class Nil extends Atom implements SList {
 
 	@Override
 	public SExpr car() throws LVMException {
-		return new Nil(); // Le car de Nil est Nil
+		return this; // Le car de Nil est Nil
 	}
 
 	@Override
 	public SExpr cdr() throws LVMException {
-		return new Nil(); // Le cdr de Nil est Nil
+		return this; // Le cdr de Nil est Nil
 	}
 
 	@Override
-	public void eval() throws LVMException {
-		return; // TODO: make function
+	public SExpr eval() throws LVMException {
+		return this; // TODO: make function
 	}
 
 	@Override

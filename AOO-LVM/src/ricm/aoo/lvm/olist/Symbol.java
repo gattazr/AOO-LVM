@@ -4,10 +4,10 @@ import ricm.aoo.lvm.utils.LVMException;
 
 public class Symbol extends Atom {
 
-	private String pSymbol;
+	protected String pName;
 
 	public Symbol(String aString) {
-		this.pSymbol = aString;
+		this.pName = aString;
 	}
 
 	@Override
@@ -23,13 +23,13 @@ public class Symbol extends Atom {
 	}
 
 	@Override
-	public void eval() throws LVMException {
-		return; // TODO: make function
+	public SExpr eval() throws LVMException {
+		return null; // TODO: make function
 	}
 
 	@Override
 	public String toString() {
-		return this.pSymbol.toString();
+		return this.pName.toString();
 	}
 
 }

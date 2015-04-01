@@ -21,10 +21,11 @@ public interface SExpr {
 	/**
 	 *
 	 * Evaluation de l'expression
+	 * @return TODO
 	 *
 	 * @throws LVMException
 	 */
-	public void eval() throws LVMException;
+	public SExpr eval() throws LVMException;
 
 	@Override
 	public String toString();

@@ -23,8 +23,8 @@ public class SCons implements SList {
 	}
 
 	@Override
-	public void eval() throws LVMException {
-		return; // TODO: make function
+	public SExpr eval() throws LVMException {
+		return null; // TODO: make function
 	}
 
 	@Override
