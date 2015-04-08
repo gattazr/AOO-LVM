@@ -1,8 +1,13 @@
-package ricm.aoo.lvm.olist;
+package ricm.aoo.lvm.kernel;
 
-import ricm.aoo.lvm.utils.LVMException;
+import ricm.aoo.lvm.LVMException;
 
 public class Nil extends Atom implements SList {
+
+	public static Nil NIL = new Nil();
+
+	private Nil() {
+	}
 
 	@Override
 	public SExpr car() throws LVMException {

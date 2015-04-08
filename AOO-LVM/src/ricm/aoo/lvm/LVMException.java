@@ -1,4 +1,4 @@
-package ricm.aoo.lvm.utils;
+package ricm.aoo.lvm;
 
 public class LVMException extends Exception {
 

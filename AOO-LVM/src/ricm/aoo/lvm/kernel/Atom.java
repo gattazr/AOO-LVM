@@ -1,4 +1,4 @@
-package ricm.aoo.lvm.olist;
+package ricm.aoo.lvm.kernel;
 
 public abstract class Atom implements SExpr {
 

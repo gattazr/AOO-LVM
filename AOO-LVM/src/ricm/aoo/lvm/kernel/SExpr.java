@@ -1,6 +1,6 @@
-package ricm.aoo.lvm.olist;
+package ricm.aoo.lvm.kernel;
 
-import ricm.aoo.lvm.utils.LVMException;
+import ricm.aoo.lvm.LVMException;
 
 public interface SExpr {
 
@@ -21,6 +21,7 @@ public interface SExpr {
 	/**
 	 *
 	 * Evaluation de l'expression
+	 * 
 	 * @return TODO
 	 *
 	 * @throws LVMException

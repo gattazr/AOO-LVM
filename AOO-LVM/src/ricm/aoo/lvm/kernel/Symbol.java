@@ -1,6 +1,6 @@
-package ricm.aoo.lvm.olist;
+package ricm.aoo.lvm.kernel;
 
-import ricm.aoo.lvm.utils.LVMException;
+import ricm.aoo.lvm.LVMException;
 
 public class Symbol extends Atom {
 

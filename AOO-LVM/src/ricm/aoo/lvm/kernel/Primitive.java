@@ -1,8 +1,6 @@
-package ricm.aoo.lvm.ofunc;
+package ricm.aoo.lvm.kernel;
 
-import ricm.aoo.lvm.olist.Atom;
-import ricm.aoo.lvm.olist.SExpr;
-import ricm.aoo.lvm.utils.LVMException;
+import ricm.aoo.lvm.LVMException;
 
 public class Primitive extends Atom implements Fonction {
 
@@ -24,8 +22,7 @@ public class Primitive extends Atom implements Fonction {
 
 	@Override
 	public SExpr eval() throws LVMException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new LVMException("Impossible d'évaluer une primitive");
 	}
 
 }
