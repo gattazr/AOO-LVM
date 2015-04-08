@@ -1,5 +1,6 @@
 package ricm.aoo.lvm.kernel;
 
+import ricm.aoo.lvm.Context;
 import ricm.aoo.lvm.LVMException;
 
 public class Symbol extends Atom {
@@ -23,8 +24,8 @@ public class Symbol extends Atom {
 	}
 
 	@Override
-	public SExpr eval() throws LVMException {
-		return null; // TODO: make function
+	public SExpr eval(Context context) throws LVMException {
+		return context.search(this);
 	}
 
 	@Override

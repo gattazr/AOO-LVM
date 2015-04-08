@@ -1,5 +1,6 @@
 package ricm.aoo.lvm.kernel;
 
+import ricm.aoo.lvm.Context;
 import ricm.aoo.lvm.LVMException;
 
 public class Primitive extends Atom implements Fonction {
@@ -21,7 +22,7 @@ public class Primitive extends Atom implements Fonction {
 	}
 
 	@Override
-	public SExpr eval() throws LVMException {
+	public SExpr eval(Context context) throws LVMException {
 		throw new LVMException("Impossible d'évaluer une primitive");
 	}
 

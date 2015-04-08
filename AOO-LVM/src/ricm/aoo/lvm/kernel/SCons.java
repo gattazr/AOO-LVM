@@ -1,5 +1,6 @@
 package ricm.aoo.lvm.kernel;
 
+import ricm.aoo.lvm.Context;
 import ricm.aoo.lvm.LVMException;
 
 public class SCons implements SList {
@@ -23,7 +24,7 @@ public class SCons implements SList {
 	}
 
 	@Override
-	public SExpr eval() throws LVMException {
+	public SExpr eval(Context context) throws LVMException {
 		return null; // TODO: make function
 	}
 
