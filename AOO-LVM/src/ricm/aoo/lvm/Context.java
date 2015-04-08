@@ -11,13 +11,14 @@ import ricm.aoo.lvm.kernel.Symbol;
 
 public class Context {
 
-	public static Context CONTEXT = new Context();
+	private List<Map<Symbol, SExpr>> pContexts;
 
-	private List<Map<Symbol, SExpr>> pContext;
-
-	private Context() {
-		this.pContext = new LinkedList<Map<Symbol, SExpr>>();
-		this.pContext.add(new HashMap<Symbol, SExpr>());
+	/**
+	 * Créé un contexte
+	 */
+	public Context() {
+		this.pContexts = new LinkedList<Map<Symbol, SExpr>>();
+		this.pContexts.add(new HashMap<Symbol, SExpr>());
 	}
 
 	/**
@@ -27,7 +28,7 @@ public class Context {
 	 * @param aExpr
 	 */
 	public void addToContext(Symbol aSymbole, SExpr aExpr) {
-		this.pContext.get(this.pContext.size() - 1).put(aSymbole, aExpr);
+		this.pContexts.get(this.pContexts.size() - 1).put(aSymbole, aExpr);
 	}
 
 	/**
@@ -37,21 +38,21 @@ public class Context {
 	 * @param aExpr
 	 */
 	public void addToContextGeneral(Symbol aSymbole, SExpr aExpr) {
-		this.pContext.get(1).put(aSymbole, aExpr);
+		this.pContexts.get(1).put(aSymbole, aExpr);
 	}
 
 	/**
 	 * Retire le dernier contexte
 	 */
 	public void popContext() {
-		this.pContext.remove(this.pContext.size() - 1);
+		this.pContexts.remove(this.pContexts.size() - 1);
 	}
 
 	/**
 	 * Rajoute un contexte
 	 */
 	public void pushContext() {
-		this.pContext.add(new HashMap<Symbol, SExpr>());
+		this.pContexts.add(new HashMap<Symbol, SExpr>());
 	}
 
 	/**
@@ -67,8 +68,8 @@ public class Context {
 	 */
 	public SExpr search(Symbol aSymbol) {
 		SExpr wSExpr;
-		ListIterator<Map<Symbol, SExpr>> wIterator = this.pContext
-				.listIterator(this.pContext.size() - 1);
+		ListIterator<Map<Symbol, SExpr>> wIterator = this.pContexts
+				.listIterator(this.pContexts.size() - 1);
 
 		/* Itere dans chaque contexte en partant du plus récent */
 		while (wIterator.hasPrevious()) {
