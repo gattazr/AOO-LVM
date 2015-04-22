@@ -3,7 +3,7 @@ package ricm.aoo.lvm.kernel;
 import ricm.aoo.lvm.Context;
 import ricm.aoo.lvm.LVMException;
 
-public abstract class Primitive extends Atom implements Fonction {
+public abstract class Primitive extends Atom implements Foncteur {
 
 	public Primitive() {
 		// TODO Auto-generated constructor stub
@@ -24,14 +24,6 @@ public abstract class Primitive extends Atom implements Fonction {
 	@Override
 	public final SExpr eval(Context aContext) throws LVMException {
 		throw new LVMException("Impossible d'évaluer une primitive");
-	}
-
-	@Override
-	public final SExpr exec(Context aContext, SExpr aSExpr) throws LVMException {
-		if (needEvaluation()) {
-			return execPrimitive(aSExpr.eval(aContext));
-		}
-		return execPrimitive(aSExpr);
 	}
 
 }

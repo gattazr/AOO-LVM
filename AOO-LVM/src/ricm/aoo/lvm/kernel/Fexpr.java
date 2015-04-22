@@ -1,16 +1,13 @@
 package ricm.aoo.lvm.kernel;
 
-public class Fexpr extends Function {
+import ricm.aoo.lvm.LVMException;
+
+public class Fexpr extends Fonction {
 
 	@Override
-	public SExpr execPrimitive(SExpr aSExpr) {
+	public SExpr exec(SExpr aSExpr) throws LVMException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public boolean needEvaluation() {
-		return true;
 	}
 
 }
