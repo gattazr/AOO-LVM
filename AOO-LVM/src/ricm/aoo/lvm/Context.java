@@ -11,7 +11,7 @@ import ricm.aoo.lvm.kernel.Symbol;
 
 public class Context {
 
-	private List<Map<Symbol, SExpr>> pContexts;
+	public List<Map<Symbol, SExpr>> pContexts;
 
 	/**
 	 * Créé un contexte

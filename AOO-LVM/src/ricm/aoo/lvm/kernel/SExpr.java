@@ -1,7 +1,7 @@
 package ricm.aoo.lvm.kernel;
 
-import ricm.aoo.lvm.Context;
 import ricm.aoo.lvm.LVMException;
+import ricm.aoo.lvm.MachineLISP;
 
 public interface SExpr {
 
@@ -21,12 +21,12 @@ public interface SExpr {
 
 	/**
 	 * Evaluation de l'expression
-	 * 
-	 * @param aContext
+	 *
+	 * @param aMachineLisp
 	 * @return
 	 * @throws LVMException
 	 */
-	public SExpr eval(Context aContext) throws LVMException;
+	public SExpr eval(MachineLISP aMachineLisp) throws LVMException;
 
 	@Override
 	public String toString();

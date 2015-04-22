@@ -1,7 +1,7 @@
 package ricm.aoo.lvm.kernel;
 
-import ricm.aoo.lvm.Context;
 import ricm.aoo.lvm.LVMException;
+import ricm.aoo.lvm.MachineLISP;
 
 public abstract class Primitive extends Atom implements Foncteur {
 
@@ -22,7 +22,7 @@ public abstract class Primitive extends Atom implements Foncteur {
 	}
 
 	@Override
-	public final SExpr eval(Context aContext) throws LVMException {
+	public final SExpr eval(MachineLISP aMachineLisp) throws LVMException {
 		throw new LVMException("Impossible d'évaluer une primitive");
 	}
 
