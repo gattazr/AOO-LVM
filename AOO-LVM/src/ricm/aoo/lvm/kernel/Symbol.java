@@ -25,7 +25,7 @@ public class Symbol extends Atom {
 
 	@Override
 	public SExpr eval(Context aContext) throws LVMException {
-		return null; // TODO: make function
+		return aContext.search(this);
 	}
 
 	@Override

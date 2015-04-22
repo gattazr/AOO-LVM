@@ -62,8 +62,8 @@ public class Context {
 	 *
 	 * @param aSymbol
 	 *            Symbole à rechercher dans les contextes
-	 * @return la SExpr lié à ce symbole dans le contexte. null si le symbole
-	 *         n'est pas dans le contexte
+	 * @return la SExpr lié à ce symbole dans le contexte. lui-même si le
+	 *         symbole n'est pas dans le contexte
 	 *
 	 */
 	public SExpr search(Symbol aSymbol) {
@@ -80,6 +80,6 @@ public class Context {
 			}
 		}
 
-		return null;
+		return aSymbol;
 	}
 }

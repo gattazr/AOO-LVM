@@ -26,6 +26,19 @@ public class SCons implements SList {
 	@Override
 	public SExpr eval(Context aContext) throws LVMException {
 		return null; // TODO: make function
+		/*
+		 * 
+		 * Primitive prim ( = car() ) Expr expr = car() Si car() instanceof
+		 * Symbole {
+		 * 
+		 * Si prim instanceof Primitive { return prim.exec(cdr()) }
+		 * 
+		 * Si expr instanceof Expr { return expr.exec(cdr()) }
+		 * 
+		 * }
+		 * 
+		 * Sinon throw new LVMException
+		 */
 	}
 
 	@Override

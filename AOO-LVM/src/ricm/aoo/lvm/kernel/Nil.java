@@ -21,8 +21,8 @@ public class Nil extends Atom implements SList {
 	}
 
 	@Override
-	public SExpr eval(Context aContext) throws LVMException {
-		return this; // TODO: make function
+	public SExpr eval(Context context) throws LVMException {
+		return this; // eval de Nil est Nil
 	}
 
 	@Override

@@ -20,14 +20,10 @@ public interface SExpr {
 	public SExpr cdr() throws LVMException;
 
 	/**
-	 *
 	 * Evaluation de l'expression
-	 *
+	 * 
 	 * @param aContext
-	 *            TODO
-	 *
-	 * @return TODO
-	 *
+	 * @return
 	 * @throws LVMException
 	 */
 	public SExpr eval(Context aContext) throws LVMException;
