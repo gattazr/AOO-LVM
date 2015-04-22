@@ -9,8 +9,8 @@ public class SCons implements SList {
 	protected SExpr pCdr;
 
 	public SCons(SExpr aCar, SExpr aCdr) {
-		this.pCar = aCar; // Ce serait mieux d'utiliser une copies
-		this.pCar = aCdr; // Ce serait mieux d'utiliser une copies
+		this.pCar = aCar; // Ce serait mieux d'utiliser une copie
+		this.pCdr = aCdr; // Ce serait mieux d'utiliser une copie
 	}
 
 	@Override
@@ -28,8 +28,10 @@ public class SCons implements SList {
 		return null; // TODO: make function
 		/*
 		 * 
-		 * Primitive prim ( = car() ) Expr expr = car() Si car() instanceof
-		 * Symbole {
+		 * Primitive prim ( = car() ) Expr expr = car()
+		 * 
+		 * Si car() instanceof Symbole {
+		 * 
 		 * 
 		 * Si prim instanceof Primitive { return prim.exec(cdr()) }
 		 * 
