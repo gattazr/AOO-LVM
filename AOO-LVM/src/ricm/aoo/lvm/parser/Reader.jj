@@ -3,8 +3,7 @@
  */options{
   DEBUG_PARSER=true;  STATIC = true;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
 
-import ricm.aoo.lvm.olist.*;
-import ricm.aoo.lvm.utils.LVMException;
+import ricm.aoo.lvm.kernel.*;
 import java.io.*;
 
 public class Reader{
@@ -17,7 +16,7 @@ public class Reader{
   public static SExpr read() throws LVMException  {
     Reader parser = new Reader(in);
     SExpr s;
-    try    {      s = parser.SEXPR();    }    catch(Exception e)    {      throw (LVMException)e;    }
+    try    {      s = parser.SEXPR();    }    catch(Exception e)    {      throw new LVMException("Parser Error: "+e);    }
 	return s;  }
 
   /** lecture d'une S-EXPR à de la chaine
@@ -26,7 +25,7 @@ public class Reader{
    * @throws LVMException une erreur de syntaxe
    */
   public static SExpr read(String s) throws LVMException  {
-     return new Nil();  }
+     return Nil.NIL;  }
 
   /** évaluation de la séquence S-Exprs à partir du fichiers
    * @param s : le nom du fichier
@@ -34,7 +33,7 @@ public class Reader{
    * @throws LVMException une erreur de syntaxe
    */
   public static SExpr importe(String s) throws LVMException
-  {	return new Nil();
+  {	return Nil.NIL;
   }}PARSER_END(Reader)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < COT : "'" >| < PO : "(" >| < PF : ")" >
 | < PT : "." >}TOKEN :{  < IDENT : (< SYMB >)+ >| < #SYMB : [ "a"-"z" , "A"-"Z" , "1"-"9" , "-" , "." ] >}SExpr SEXPR () :{  SExpr se;}{  	< COT > se=SEXPR()  	{    	return new SCons(new Symbol("quote"), se);  	}|
 	se=ATOME()  	{   		return se;  	}|
@@ -69,7 +68,7 @@ SExpr DEB_LIST () :
 
 SExpr NIL () : {}
 {
-	<PF>	{	  return new Nil();
+	<PF>	{	  return Nil.NIL;
 	}}
 
 SExpr LIST () :
@@ -92,6 +91,6 @@ SExpr FIN_LIST () :
 
 SExpr SUITE_SEXPR () :{  	SExpr suite, elt;}{ 	elt=SEXPR() suite=SUITE_SEXPR()  	{    	return new SCons(elt, suite);  	}
 | 
-	{	 	return new Nil();
+	{	 	return Nil.NIL;
 	}
 }  
