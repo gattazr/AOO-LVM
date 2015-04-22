@@ -1,5 +1,6 @@
 package ricm.aoo.lvm.kernel;
 
+import ricm.aoo.lvm.Context;
 import ricm.aoo.lvm.LVMException;
 
 public class Nil extends Atom implements SList {
@@ -20,7 +21,7 @@ public class Nil extends Atom implements SList {
 	}
 
 	@Override
-	public SExpr eval() throws LVMException {
+	public SExpr eval(Context aContext) throws LVMException {
 		return this; // TODO: make function
 	}
 
