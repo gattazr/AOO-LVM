@@ -25,22 +25,30 @@ public class SCons implements SList {
 
 	@Override
 	public SExpr eval(MachineLISP aMachineLisp) throws LVMException {
-		return null; // TODO: make function
 		/*
-		 * 
-		 * Primitive prim ( = car() ) Expr expr = car()
-		 * 
-		 * Si car() instanceof Symbole {
-		 * 
-		 * 
-		 * Si prim instanceof Primitive { return prim.exec(cdr()) }
-		 * 
-		 * Si expr instanceof Expr { return expr.exec(cdr()) }
-		 * 
-		 * }
-		 * 
-		 * Sinon throw new LVMException
+		 * switch(Evaluation du car de la SExpr)
+		 *
+		 * Si PRIMITIVE : execution avec en paramètre le cdr
+		 *
+		 * Si SCONS : Evaluation de la SCONS ? -> Recherche de EXPR ou FEXPR
+		 * avec lambda ou flamba + Excecution de la Lamba ou FLambda
+		 *
+		 * Si Autre : LVMException
 		 */
+		SExpr wFoncteur = car().eval(aMachineLisp);
+		if (wFoncteur instanceof Primitive) {
+			return ((Primitive) wFoncteur).exec(cdr());
+		}
+		if (wFoncteur instanceof SCons) {
+			if (wFoncteur.car().toString().equals("lambda")) {
+				/* Expr */
+				return new Expr().exec(this);
+			} else if (wFoncteur.car().toString().equals("flambda")) {
+				/* FExpr */
+				return new Fexpr().exec(this);
+			}
+		}
+		throw new LVMException("Cannot eval");
 	}
 
 	@Override
