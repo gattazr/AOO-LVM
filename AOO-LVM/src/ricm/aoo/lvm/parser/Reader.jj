@@ -1,14 +1,38 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
  */options{
-  DEBUG_PARSER=true;  STATIC = true;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
+  DEBUG_PARSER=true;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
 
 import ricm.aoo.lvm.kernel.*;
 import java.io.*;
 
 public class Reader{
-  /** le support de lecture */  protected static java.io.Reader in = new BufferedReader (new InputStreamReader (System.in));
+  	/** le support de lecture */	protected static java.io.Reader in = new BufferedReader (new InputStreamReader (System.in));
 
+	public static void main(String args []) throws ParseException {
+		String command;
+		while (true){
+			System.out.println("Reading from standard input...");
+			System.out.print("Enter an expression like LISP :");
+			try{
+			  	command = Reader.read().toString();
+				System.out.println("Expression lue au clavier : "+command);
+				SExpr e=Reader.read(command);				command = e.toString();				System.out.println("Expression lue depuis un string : "+command);
+  			}
+  			catch (Exception e){
+				System.out.println("NOK.");
+				System.out.println(e.getMessage());
+				//Reader.ReInit(System.in);
+			}
+			catch (Error e){
+				System.out.println("Oops.");
+				System.out.println(e.getMessage());
+				break;
+			}
+		}
+  }
+	
+	
   /** lecture d'une S-EXPR à partir au terminal
    * @return SExpr : la SExpr construite
    * @throws LVMException une erreur de syntaxe
@@ -25,7 +49,17 @@ public class Reader{
    * @throws LVMException une erreur de syntaxe
    */
   public static SExpr read(String s) throws LVMException  {
-     return Nil.NIL;  }
+	Reader parser = new Reader(new BufferedReader (new StringReader (s)));
+    SExpr se;
+    try
+    {
+      se = parser.SEXPR();
+    }
+    catch(Exception e)
+    {
+      throw new LVMException("Parser Error: "+e);
+    }
+	return se;  }
 
   /** évaluation de la séquence S-Exprs à partir du fichiers
    * @param s : le nom du fichier
@@ -34,8 +68,29 @@ public class Reader{
    */
   public static SExpr importe(String s) throws LVMException
   {	return Nil.NIL;
-  }}PARSER_END(Reader)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < COT : "'" >| < PO : "(" >| < PF : ")" >
-| < PT : "." >}TOKEN :{  < IDENT : (< SYMB >)+ >| < #SYMB : [ "a"-"z" , "A"-"Z" , "1"-"9" , "-" , "." ] >}SExpr SEXPR () :{  SExpr se;}{  	< COT > se=SEXPR()  	{    	return new SCons(new Symbol("quote"), se);  	}|
+  }}PARSER_END(Reader)
+//les caractères ignorés
+SKIP :
+{
+	" " | "\t" | "\r" | "\n" //attention elimine la notion de fin de ligne
+	| "\u0000" | "\u0001" | "\u0002" | "\u0003" | "\u0004" | "\u0005" | "\u0006" | "\u0007" 
+	| "\u0008" | "\u000B" | "\u000C" | "\u000E" | "\u000F" | "\u0010" | "\u0011" | "\u0012"
+	| "\u0013" | "\u0014" | "\u0015" | "\u0016" | "\u0017" | "\u0018" | "\u0019" | "\u001A"
+	| "\u001B" | "\u001C" | "\u001D" | "\u001E" | "\u001F" | "\u007F"
+}
+
+MORE :
+{	
+	"//" : IN_SL_COMMENT
+| 	"/*" : IN_ML_COMMENT
+}
+
+<IN_SL_COMMENT> SPECIAL_TOKEN : {<SL_COMMENT: "\n" | "\r" | "\r\n"> : DEFAULT}
+<IN_SL_COMMENT> SPECIAL_TOKEN : {<ML_COMMENT: "*/"> : DEFAULT}
+<IN_SL_COMMENT, IN_ML_COMMENT> SKIP : { < ~[] >} // les lexemes du langage
+
+TOKEN : /* OPERATORS */{  < COT : "'" >| < PO : "(" >| < PF : ")" >
+| < PT : "." >}TOKEN :{  < IDENT : (< SYMB >)+ >| < #SYMB : [ "a"-"z" , "A"-"Z" , "1"-"9" , "-" , "." ] >}SExpr SEXPR () :{  SExpr se;}{  	< COT > se=SEXPR()  	{    	return new SCons(new Symbol("quote"), new SCons(se, Nil.NIL));  	}|
 	se=ATOME()  	{   		return se;  	}|
 	< PO > se=DEB_LIST()	{
 		return se;	}}
