@@ -28,18 +28,26 @@ public abstract class Primitive extends Atom implements Foncteur {
 	@Override
 	public final SExpr exec(MachineLISP aMachineLisp, SExpr aSExpr)
 			throws LVMException {
-		SExpr wSExpr = aSExpr;
+		SExpr wSExpr;
 		int wNArgs;
 		int wNSExpr;
 		String wPrimName;
 
-		/*
-		 * Evaluer si besoin aSexpr -> il faut évaluer chaque élement de la
-		 * liste de façon indépendante
-		 */
-		// if (this instanceof Subr) {
-		// wSExpr = aSExpr.eval(aMachineLisp);
-		// }
+		/* Evaluer aSexpr si besoin */
+		if (this instanceof Subr) {
+			SExpr wCurrent = aSExpr;
+			SCons wTemp = new SCons(wCurrent.car().eval(aMachineLisp), Nil.NIL);
+			wSExpr = wTemp;
+
+			while (wCurrent.cdr() != Nil.NIL) {
+				wTemp.setCdr(new SCons(wCurrent.cdr().car().eval(aMachineLisp),
+						Nil.NIL));
+				wCurrent = wCurrent.cdr();
+				wTemp = (SCons) wTemp.cdr();
+			}
+		} else {
+			wSExpr = aSExpr;
+		}
 
 		/* Vérification du nombre d'arguments */
 		wNArgs = numberOfArgs();
@@ -57,7 +65,6 @@ public abstract class Primitive extends Atom implements Foncteur {
 		}
 		/* Exécution de la primitive */
 		return execPrimitive(aMachineLisp, wSExpr);
-
 	}
 
 	/**

@@ -49,12 +49,16 @@ public class SCons implements SList {
 				return new Fexpr().exec(null, this);
 			}
 		}
-		throw new LVMException("Cannot eval " + wFoncteur.toString());
+		throw new LVMException(String.format(
+				"*** - EVAL: undefined function %s", wFoncteur.toString()));
+	}
+
+	public void setCdr(SExpr aCdr) {
+		this.pCdr = aCdr;
 	}
 
 	@Override
 	public int size() throws LVMException {
-		// TODO Auto-generated method stub
 		return 1 + cdr().size();
 	}
 
@@ -70,4 +74,5 @@ public class SCons implements SList {
 
 		return wString.append(" )").toString();
 	}
+
 }
