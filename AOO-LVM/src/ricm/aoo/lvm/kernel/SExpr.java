@@ -28,6 +28,15 @@ public interface SExpr {
 	 */
 	public SExpr eval(MachineLISP aMachineLisp) throws LVMException;
 
+	/**
+	 *
+	 * Calcule la taille de la SExpr. 0 pour NIL, 1 si il s'agit d'un atome, le
+	 * nombre d'élement dans la liste sinon.
+	 *
+	 * @return
+	 */
+	public int size() throws LVMException;
+
 	@Override
 	public String toString();
 

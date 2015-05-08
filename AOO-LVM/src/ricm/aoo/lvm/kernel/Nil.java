@@ -27,7 +27,6 @@ public class Nil extends Atom implements SList {
 
 	@Override
 	public String toString() {
-		return new String("()");
+		return new String("NIL");
 	}
-
 }

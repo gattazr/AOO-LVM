@@ -28,7 +28,8 @@ public class SCons implements SList {
 		/*
 		 * switch(Evaluation du car de la SExpr)
 		 *
-		 * Si PRIMITIVE : execution avec en paramètre le cdr
+		 * Si PRIMITIVE : execution avec en paramètre la liste des arguments
+		 * (cdr)
 		 *
 		 * Si SCONS : Evaluation de la SCONS ? -> Recherche de EXPR ou FEXPR
 		 * avec lambda ou flamba + Excecution de la Lamba ou FLambda
@@ -37,18 +38,24 @@ public class SCons implements SList {
 		 */
 		SExpr wFoncteur = car().eval(aMachineLisp);
 		if (wFoncteur instanceof Primitive) {
-			return ((Primitive) wFoncteur).exec(cdr());
+			return ((Primitive) wFoncteur).exec(aMachineLisp, cdr());
 		}
 		if (wFoncteur instanceof SCons) {
 			if (wFoncteur.car().toString().equals("lambda")) {
 				/* Expr */
-				return new Expr().exec(this);
+				return new Expr().exec(null, this);
 			} else if (wFoncteur.car().toString().equals("flambda")) {
 				/* FExpr */
-				return new Fexpr().exec(this);
+				return new Fexpr().exec(null, this);
 			}
 		}
-		throw new LVMException("Cannot eval");
+		throw new LVMException("Cannot eval " + wFoncteur.toString());
+	}
+
+	@Override
+	public int size() throws LVMException {
+		// TODO Auto-generated method stub
+		return 1 + cdr().size();
 	}
 
 	@Override

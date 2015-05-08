@@ -1,7 +1,7 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
  */options{
-  DEBUG_PARSER=true;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
+  DEBUG_PARSER=false;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
 
 import ricm.aoo.lvm.kernel.*;
 import java.io.*;
@@ -100,7 +100,11 @@ SExpr ATOME() :
 }
 {
   	s=SYMBOLE()
-  	{		return new Symbol(s);
+  	{
+		if(s.toUpperCase().equals("NIL"))		{
+		  return Nil.NIL;		}
+		else		{
+		  return new Symbol(s);		}		
 	}
 }
 

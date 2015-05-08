@@ -38,7 +38,7 @@ public class Context {
 	 * @param aExpr
 	 */
 	public void addToContextGeneral(Symbol aSymbole, SExpr aExpr) {
-		this.pContexts.get(1).put(aSymbole, aExpr);
+		this.pContexts.get(0).put(aSymbole, aExpr);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class Context {
 	public SExpr search(Symbol aSymbol) {
 		SExpr wSExpr;
 		ListIterator<Map<Symbol, SExpr>> wIterator = this.pContexts
-				.listIterator(this.pContexts.size() - 1);
+				.listIterator(this.pContexts.size());
 
 		/* Itere dans chaque contexte en partant du plus récent */
 		while (wIterator.hasPrevious()) {

@@ -1,18 +1,19 @@
 package ricm.aoo.lvm.kernel;
 
 import ricm.aoo.lvm.LVMException;
+import ricm.aoo.lvm.MachineLISP;
 
 public interface Foncteur {
 
 	/**
 	 * TODO: comments
-	 * 
+	 * @param aMachineLisp TODO
 	 * @param aSExpr
-	 *
+	 * 
 	 * @return
 	 * @throws LVMException
 	 */
-	SExpr exec(SExpr aSExpr) throws LVMException;
+	SExpr exec(MachineLISP aMachineLisp, SExpr aSExpr) throws LVMException;
 
 }
 
