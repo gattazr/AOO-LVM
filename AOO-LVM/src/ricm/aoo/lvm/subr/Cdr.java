@@ -15,7 +15,7 @@ public class Cdr extends Subr {
 			throw new LVMException("*** - CDR: " + aSExpr.car().toString()
 					+ " is not a list");
 		}
-		return aSExpr.car().car();
+		return aSExpr.car().cdr();
 	}
 
 	@Override
