@@ -13,6 +13,7 @@ import ricm.aoo.lvm.primit.Eq;
 import ricm.aoo.lvm.primit.Eval;
 import ricm.aoo.lvm.primit.Print;
 import ricm.aoo.lvm.primit.Quit;
+import ricm.aoo.lvm.primit.Scope;
 import ricm.aoo.lvm.primit.Set;
 import ricm.aoo.lvm.primit.TopLevel;
 
@@ -34,6 +35,7 @@ public class MachineLISP {
 		this.pContext.addToContextGeneral(new Symbol("eval"), new Eval());
 		this.pContext.addToContextGeneral(new Symbol("print"), new Print());
 		this.pContext.addToContextGeneral(new Symbol("quit"), new Quit());
+		this.pContext.addToContextGeneral(new Symbol("scope"), new Scope());
 		this.pContext.addToContextGeneral(new Symbol("set"), new Set());
 		this.pContext.addToContextGeneral(new Symbol("toplevel"),
 				new TopLevel());
