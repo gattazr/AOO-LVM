@@ -8,7 +8,9 @@ import ricm.aoo.lvm.primit.Cons;
 import ricm.aoo.lvm.primit.De;
 import ricm.aoo.lvm.primit.Df;
 import ricm.aoo.lvm.primit.Eq;
+import ricm.aoo.lvm.primit.Quit;
 import ricm.aoo.lvm.primit.Set;
+import ricm.aoo.lvm.primit.TopLevel;
 
 public class MachineLISP {
 
@@ -23,7 +25,10 @@ public class MachineLISP {
 		this.pContext.addToContextGeneral(new Symbol("de"), new De());
 		this.pContext.addToContextGeneral(new Symbol("df"), new Df());
 		this.pContext.addToContextGeneral(new Symbol("eq"), new Eq());
+		this.pContext.addToContextGeneral(new Symbol("quit"), new Quit());
 		this.pContext.addToContextGeneral(new Symbol("set"), new Set());
+		this.pContext.addToContextGeneral(new Symbol("toplevel"),
+				new TopLevel());
 	}
 
 	public Context getContext() {
