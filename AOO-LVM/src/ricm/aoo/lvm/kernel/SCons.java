@@ -36,25 +36,24 @@ public class SCons implements SList {
 		 *
 		 * Si Autre : LVMException
 		 */
-		SExpr wFoncteur = car().eval(aMachineLisp);
+		SExpr wFoncteur;
+		wFoncteur = car().eval(aMachineLisp);
+
 		if (wFoncteur instanceof Primitive) {
 			return ((Primitive) wFoncteur).exec(aMachineLisp, cdr());
 		}
 		if (wFoncteur instanceof SCons) {
 			if (wFoncteur.car().toString().equals("lambda")) {
 				/* Expr */
-				return new Expr().exec(null, this);
+				return new Expr().exec(aMachineLisp, cdr());
 			} else if (wFoncteur.car().toString().equals("flambda")) {
 				/* FExpr */
-				return new Fexpr().exec(null, this);
+				return new Fexpr().exec(aMachineLisp, cdr());
 			}
 		}
-		throw new LVMException(String.format(
-				"*** - EVAL: undefined function %s", wFoncteur.toString()));
-	}
 
-	public void setCdr(SExpr aCdr) {
-		this.pCdr = aCdr;
+		throw new LVMException(String.format(
+				"*** - EVAL: undefined function %s", wFoncteur));
 	}
 
 	@Override

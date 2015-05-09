@@ -28,41 +28,43 @@ public abstract class Primitive extends Atom implements Foncteur {
 	@Override
 	public final SExpr exec(MachineLISP aMachineLisp, SExpr aSExpr)
 			throws LVMException {
-		SExpr wSExpr;
+		SExpr wSExpr = Nil.NIL;
 		int wNArgs;
 		int wNSExpr;
 		String wPrimName;
 
+		/* Vérification du nombre d'arguments */
+		wNArgs = numberOfArgs();
+		wNSExpr = aSExpr.size();
+		wPrimName = getClass().getSimpleName().toUpperCase();
+		if (wNArgs > wNSExpr) {
+			throw new LVMException(String.format(
+					"*** - EVAL: too few arguments given to %s : %s",
+					wPrimName, new SCons(new Symbol(wPrimName), aSExpr)));
+		}
+		if (wNArgs < wNSExpr) {
+			throw new LVMException(String.format(
+					"*** - EVAL: too many arguments given to %s : %s",
+					wPrimName, new SCons(new Symbol(wPrimName), aSExpr)));
+		}
+
 		/* Evaluer aSexpr si besoin */
 		if (this instanceof Subr) {
-			SExpr wCurrent = aSExpr;
-			SCons wTemp = new SCons(wCurrent.car().eval(aMachineLisp), Nil.NIL);
-			wSExpr = wTemp;
-
-			while (wCurrent.cdr() != Nil.NIL) {
-				wTemp.setCdr(new SCons(wCurrent.cdr().car().eval(aMachineLisp),
-						Nil.NIL));
-				wCurrent = wCurrent.cdr();
-				wTemp = (SCons) wTemp.cdr();
+			/* Méthode un peu lourdre mais permet de garder SCons immuables */
+			SExpr wNext = Nil.NIL;
+			for (int wI = wNArgs; wI > 0; wI--) {
+				SExpr wTemp = aSExpr;
+				for (int wJ = 1; wJ < wI; wJ++) {
+					wTemp = wTemp.cdr();
+				}
+				wTemp = wTemp.car();
+				wSExpr = new SCons(wTemp.eval(aMachineLisp), wNext);
+				wNext = wSExpr;
 			}
 		} else {
 			wSExpr = aSExpr;
 		}
 
-		/* Vérification du nombre d'arguments */
-		wNArgs = numberOfArgs();
-		wNSExpr = wSExpr.size();
-		wPrimName = getClass().getSimpleName().toUpperCase();
-		if (wNArgs > wNSExpr) {
-			throw new LVMException(String.format(
-					"*** - EVAL: too few arguments given to %s : %s",
-					wPrimName, new SCons(new Symbol(wPrimName), wSExpr)));
-		}
-		if (wNArgs < wNSExpr) {
-			throw new LVMException(String.format(
-					"*** - EVAL: too many arguments given to %s : %s",
-					wPrimName, new SCons(new Symbol(wPrimName), wSExpr)));
-		}
 		/* Exécution de la primitive */
 		return execPrimitive(aMachineLisp, wSExpr);
 	}
