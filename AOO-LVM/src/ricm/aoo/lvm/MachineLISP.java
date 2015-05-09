@@ -6,6 +6,7 @@ import ricm.aoo.lvm.primit.Car;
 import ricm.aoo.lvm.primit.Cdr;
 import ricm.aoo.lvm.primit.Cons;
 import ricm.aoo.lvm.primit.De;
+import ricm.aoo.lvm.primit.Df;
 import ricm.aoo.lvm.primit.Eq;
 import ricm.aoo.lvm.primit.Quote;
 import ricm.aoo.lvm.primit.Set;
@@ -21,6 +22,7 @@ public class MachineLISP {
 		this.pContext.addToContextGeneral(new Symbol("cdr"), new Cdr());
 		this.pContext.addToContextGeneral(new Symbol("cons"), new Cons());
 		this.pContext.addToContextGeneral(new Symbol("de"), new De());
+		this.pContext.addToContextGeneral(new Symbol("df"), new Df());
 		this.pContext.addToContextGeneral(new Symbol("eq"), new Eq());
 		this.pContext.addToContextGeneral(new Symbol("quote"), new Quote());
 		this.pContext.addToContextGeneral(new Symbol("set"), new Set());
