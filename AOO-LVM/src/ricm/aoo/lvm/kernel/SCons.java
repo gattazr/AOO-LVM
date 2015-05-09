@@ -37,7 +37,15 @@ public class SCons implements SList {
 		 * Si Autre : LVMException
 		 */
 		SExpr wFoncteur;
-		wFoncteur = car().eval(aMachineLisp);
+
+		/* Gestion des lambdas et flambda en fonction anonyme */
+		if (car() instanceof SCons
+				&& (car().car().toString().equals("LAMBDA") || car().car()
+						.toString().equals("FLAMBDA"))) {
+			wFoncteur = car();
+		} else {
+			wFoncteur = car().eval(aMachineLisp);
+		}
 
 		if (wFoncteur instanceof Primitive) {
 			return ((Primitive) wFoncteur).exec(aMachineLisp, cdr());
