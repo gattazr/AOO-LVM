@@ -35,12 +35,12 @@ public class LVM {
 		} catch (IOException aException) {
 			Console.printStack(aException);
 			System.err
-					.println("Erreur durant l'initialisation de l'environnement");
+			.println("Erreur durant l'initialisation de l'environnement");
 			System.exit(1);
 		} catch (LVMException wException) {
 			Console.printStack(wException);
 			System.err
-					.println("Erreur durant l'initialisation de l'environnement");
+			.println("Erreur durant l'initialisation de l'environnement");
 			System.exit(1);
 		} finally {
 			try {
@@ -75,6 +75,7 @@ public class LVM {
 				}
 				Console.println(wSExpr.eval(aMachineLisp).toString());
 			} catch (LVMException aException) {
+				Console.println(aException.getMessage());
 				Console.printStack(aException);
 			}
 		}

@@ -17,7 +17,7 @@ public class Expr extends Fonction {
 		/* Vérification que lambda est correct */
 		if (!(wLambda.size() == 3 && wLambda.cdr().car() instanceof SList)) {
 			throw new LVMException(
-					"*** - EVAL: wrong format for lambda. Expects (LAMBDA SYMBOL LIST LIST|SYMBOL)");
+					"*** - EVAL: wrong format for LAMBDA. Expects (LAMBDA SYMBOL LIST LIST|SYMBOL)");
 		}
 
 		wNFonctParams = wLambda.cdr().car().size();

@@ -16,7 +16,7 @@ public class Fexpr extends Fonction {
 		/* Vérification que lambda est correct */
 		if (!(wLambda.size() == 3 && wLambda.cdr().car() instanceof SList)) {
 			throw new LVMException(
-					"*** - EVAL: wrong format for lambda. Expects (LAMBDA SYMBOL LIST LIST|SYMBOL)");
+					"*** - EVAL: wrong format for FLAMBDA. Expects (FLAMBDA SYMBOL LIST LIST|SYMBOL)");
 		}
 
 		wNFonctParams = wLambda.cdr().car().size();
@@ -24,12 +24,12 @@ public class Fexpr extends Fonction {
 
 		if (wNFonctParams > wNEffectParams) {
 			throw new LVMException(String.format(
-					"*** - EVAL: too few arguments given to LAMBDA : %s",
+					"*** - EVAL: too few arguments given to FLAMBDA : %s",
 					aSExpr.cdr()));
 		}
 		if (wNFonctParams < wNEffectParams) {
 			throw new LVMException(String.format(
-					"*** - EVAL: too many arguments given to LAMBDA : %s",
+					"*** - EVAL: too many arguments given to FLAMBDA : %s",
 					aSExpr.cdr()));
 		}
 
@@ -44,7 +44,7 @@ public class Fexpr extends Fonction {
 			} else {
 				throw new LVMException(
 						String.format(
-								"*** - LAMBDA: functional parameter name must be a symbol, not %s",
+								"*** - FLAMBDA: functional parameter name must be a symbol, not %s",
 								wCurFonct.car()));
 			}
 			wCurFonct = wCurFonct.cdr();
