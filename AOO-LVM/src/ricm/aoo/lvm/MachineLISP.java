@@ -1,6 +1,7 @@
 package ricm.aoo.lvm;
 
 import ricm.aoo.lvm.kernel.Symbol;
+import ricm.aoo.lvm.primit.Apply;
 import ricm.aoo.lvm.primit.Atom;
 import ricm.aoo.lvm.primit.Car;
 import ricm.aoo.lvm.primit.Cdr;
@@ -21,6 +22,7 @@ public class MachineLISP {
 
 	public MachineLISP() {
 		/* Initialisation des primitives du langages */
+		this.pContext.addToContextGeneral(new Symbol("apply"), new Apply());
 		this.pContext.addToContextGeneral(new Symbol("atom"), new Atom());
 		this.pContext.addToContextGeneral(new Symbol("car"), new Car());
 		this.pContext.addToContextGeneral(new Symbol("cdr"), new Cdr());
