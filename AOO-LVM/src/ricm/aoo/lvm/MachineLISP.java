@@ -24,18 +24,6 @@ public class MachineLISP {
 		this.pContext.addToContextGeneral(new Symbol("df"), new Df());
 		this.pContext.addToContextGeneral(new Symbol("eq"), new Eq());
 		this.pContext.addToContextGeneral(new Symbol("set"), new Set());
-
-		try {
-			Reader.read("(DF QUOTE (B) B)").eval(this);
-			Reader.read("(DE FALSE () ())").eval(this);
-			Reader.read("(DE TRUE () t)").eval(this);
-			Reader.read("(DE FIRST (A) (CAR A))").eval(this);
-			Reader.read("(DE REST (A) (CDR A))").eval(this);
-			Reader.read("(DE SECOND (A) (CAR (CDR A)))").eval(this);
-			Reader.read("(DE THIRD (A) (CAR (CDR (CDR A))))").eval(this);
-		} catch (LVMException Exception) {
-			Exception.printStackTrace();
-		}
 	}
 
 	public Context getContext() {

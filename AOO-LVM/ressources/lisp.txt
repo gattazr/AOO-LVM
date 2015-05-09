@@ -1,0 +1,7 @@
+(DF QUOTE (B) B)
+(DE FALSE () ())
+(DE TRUE () t)
+(DE FIRST (A) (CAR A))
+(DE REST (A) (CDR A))
+(DE SECOND (A) (CAR (CDR A)))
+(DE THIRD (A) (CAR (CDR (CDR A))))
