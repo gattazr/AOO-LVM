@@ -44,6 +44,15 @@ public class Context {
 	}
 
 	/**
+	 * Retire tous les contextes à l'exception du contexte général
+	 */
+	public void popAllContexts() {
+		for (int wI = this.pContexts.size() - 1; wI > 0; wI--) {
+			this.pContexts.remove(wI);
+		}
+	}
+
+	/**
 	 * Retire le dernier contexte
 	 */
 	public void popContext() {

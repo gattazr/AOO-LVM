@@ -43,12 +43,20 @@ public class SCons implements SList {
 			return ((Primitive) wFoncteur).exec(aMachineLisp, cdr());
 		}
 		if (wFoncteur instanceof SCons) {
-			if (wFoncteur.car().toString().equals("lambda")) {
+			Fonction wFunc = null;
+			if (wFoncteur.car().toString().equals("LAMBDA")) {
 				/* Expr */
-				return new Expr().exec(aMachineLisp, cdr());
-			} else if (wFoncteur.car().toString().equals("flambda")) {
+				wFunc = new Expr();
+			} else if (wFoncteur.car().toString().equals("FLAMBDA")) {
 				/* FExpr */
-				return new Fexpr().exec(aMachineLisp, cdr());
+				wFunc = new Fexpr();
+			}
+			if (wFunc != null) {
+				aMachineLisp.getContext().pushContext();
+				SExpr wRes = wFunc.exec(aMachineLisp, new SCons(wFoncteur,
+						cdr()));
+				aMachineLisp.getContext().popContext();
+				return wRes;
 			}
 		}
 

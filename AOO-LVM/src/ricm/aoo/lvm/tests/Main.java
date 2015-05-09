@@ -10,11 +10,11 @@ public class Main {
 	public static void main(String[] aArgs) {
 		MachineLISP wMachine = new MachineLISP();
 		SExpr wExpr;
-		String wDEBUG;
+		String wDEBUG = System.getProperty("DEBUG");
 		while (true) {
 			try {
+				wMachine.getContext().popAllContexts();
 				/* Affichage de DEBUG */
-				wDEBUG = System.getProperty("DEBUG");
 				if (wDEBUG != null && !wDEBUG.toLowerCase().equals("false")) {
 					System.out.println(wMachine.getContext());
 				}
