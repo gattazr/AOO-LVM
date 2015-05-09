@@ -1,7 +1,6 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{
-  DEBUG_PARSER=false;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
+ */options{  DEBUG_PARSER=true;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
 
 import ricm.aoo.lvm.kernel.*;
 import java.io.*;
@@ -39,6 +38,9 @@ public class Reader{
    */
   public static SExpr read() throws LVMException  {
     Reader parser = new Reader(in);
+    String wDEBUG = System.getProperty("DEBUG_PARSER");
+	if(wDEBUG == null || wDEBUG.toLowerCase().equals("false"))	{		parser.disable_tracing();
+	}
     SExpr s;
     try    {      s = parser.SEXPR();    }    catch(Exception e)    {      throw new LVMException("Parser Error: "+e);    }
 	return s;  }
@@ -50,6 +52,11 @@ public class Reader{
    */
   public static SExpr read(String s) throws LVMException  {
 	Reader parser = new Reader(new BufferedReader (new StringReader (s)));
+	String wDEBUG = System.getProperty("DEBUG_PARSER");
+	if(wDEBUG == null || wDEBUG.toLowerCase().equals("false"))
+	{
+		parser.disable_tracing();
+	}
     SExpr se;
     try
     {

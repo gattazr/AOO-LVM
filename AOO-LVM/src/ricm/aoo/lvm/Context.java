@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import ricm.aoo.lvm.kernel.SExpr;
 import ricm.aoo.lvm.kernel.Symbol;
@@ -81,5 +83,23 @@ public class Context {
 		}
 
 		return aSymbol;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder wBuilder = new StringBuilder();
+		ListIterator<Map<Symbol, SExpr>> wIterator = this.pContexts
+				.listIterator(this.pContexts.size());
+
+		/* Itere dans chaque contexte en partant du plus récent */
+		while (wIterator.hasPrevious()) {
+			Set<Entry<Symbol, SExpr>> wSet = wIterator.previous().entrySet();
+			for (Entry<Symbol, SExpr> wEntry : wSet) {
+				wBuilder.append(String.format("%s -> %s\n", wEntry.getKey(),
+						wEntry.getValue()));
+			}
+		}
+
+		return wBuilder.toString();
 	}
 }

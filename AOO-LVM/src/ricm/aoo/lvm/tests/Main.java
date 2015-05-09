@@ -10,9 +10,14 @@ public class Main {
 	public static void main(String[] aArgs) {
 		MachineLISP wMachine = new MachineLISP();
 		SExpr wExpr;
-
+		String wDEBUG;
 		while (true) {
 			try {
+				/* Affichage de DEBUG */
+				wDEBUG = System.getProperty("DEBUG");
+				if (wDEBUG != null && !wDEBUG.toLowerCase().equals("false")) {
+					System.out.println(wMachine.getContext());
+				}
 				System.out.print("> ");
 				wExpr = Reader.read();
 				System.out.println(wExpr.eval(wMachine).toString());
@@ -21,5 +26,4 @@ public class Main {
 			}
 		}
 	}
-
 }
