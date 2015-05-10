@@ -1,14 +1,12 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{  DEBUG_PARSER=true;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
+ */options{  DEBUG_PARSER = false;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
 
 import ricm.aoo.lvm.kernel.*;
 import java.io.*;
 
 public class Reader{
-  	/** le support de lecture */	protected static java.io.Reader in = new BufferedReader (new InputStreamReader (System.in));
-
-	public static void main(String args []) throws ParseException {
+  	public static void main(String args []) throws ParseException {
 		String command;
 		while (true){
 			System.out.println("Reading from standard input...");
@@ -37,13 +35,13 @@ public class Reader{
    * @throws LVMException une erreur de syntaxe
    */
   public static SExpr read() throws LVMException  {
-    Reader parser = new Reader(in);
+    Reader parser = new Reader( new BufferedReader (new InputStreamReader (System.in)));
+    SExpr se;
     String wDEBUG = System.getProperty("DEBUG_PARSER");
 	if(wDEBUG == null || wDEBUG.toLowerCase().equals("false"))	{		parser.disable_tracing();
 	}
-    SExpr s;
-    try    {      s = parser.SEXPR();    }    catch(Exception e)    {      throw new LVMException("Parser Error: "+e);    }
-	return s;  }
+    try    {      se = parser.SEXPR();    }    catch(Exception e)    {      throw new LVMException("Parser Error: "+e);    }
+	return se;  }
 
   /** lecture d'une S-EXPR à de la chaine
    * @param s : la chaîne
@@ -52,12 +50,12 @@ public class Reader{
    */
   public static SExpr read(String s) throws LVMException  {
 	Reader parser = new Reader(new BufferedReader (new StringReader (s)));
+	SExpr se;
 	String wDEBUG = System.getProperty("DEBUG_PARSER");
 	if(wDEBUG == null || wDEBUG.toLowerCase().equals("false"))
 	{
 		parser.disable_tracing();
 	}
-    SExpr se;
     try
     {
       se = parser.SEXPR();
@@ -69,12 +67,28 @@ public class Reader{
 	return se;  }
 
   /** évaluation de la séquence S-Exprs à partir du fichiers
+   * Gère aussi les problèmes de lecture/ecriture et d'existence de fichier
    * @param s : le nom du fichier
    * @return SExpr : symbole du nom du fichier
    * @throws LVMException une erreur de syntaxe
    */
   public static SExpr importe(String s) throws LVMException
-  {	return Nil.NIL;
+  {
+	SExpr se;
+  	String wDEBUG = System.getProperty("DEBUG_PARSER");	try
+    {
+      Reader parser = new Reader(new BufferedReader (new FileReader(s)));
+      if(wDEBUG == null || wDEBUG.toLowerCase().equals("false"))
+      {
+		parser.disable_tracing();
+	  }
+      se = parser.SEXPR();
+    }
+    catch(Exception e)
+    {
+      throw new LVMException("Parser Error: "+e);
+    }
+	return se;
   }}PARSER_END(Reader)
 //les caractères ignorés
 SKIP :
