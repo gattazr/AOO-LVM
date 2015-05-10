@@ -12,7 +12,9 @@ public class TopLevel extends Subr {
 	@Override
 	public SExpr execPrimitive(MachineLISP aMachineLisp, SExpr aSExpr)
 			throws LVMException {
+		Console.println("Hello !");
 		while (true) {
+			/* Retire tous les contextes de niveau supérieur au contexte général */
 			aMachineLisp.getContext().popAllContexts();
 			Console.print("> ");
 			try {

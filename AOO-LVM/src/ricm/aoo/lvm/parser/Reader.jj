@@ -97,7 +97,7 @@ MORE :
 <IN_SL_COMMENT, IN_ML_COMMENT> SKIP : { < ~[] >} // les lexemes du langage
 
 TOKEN : /* OPERATORS */{  < COT : "'" >| < PO : "(" >| < PF : ")" >
-| < PT : "." >}TOKEN :{  < IDENT : (< SYMB >)+ >| < #SYMB : [ "a"-"z" , "A"-"Z" , "1"-"9" , "-" , "." ] >}SExpr SEXPR () :{  SExpr se;}{  	< COT > se=SEXPR()  	{    	return new SCons(new Symbol("quote"), new SCons(se, Nil.NIL));  	}|
+| < PT : "." >}TOKEN :{  < IDENT : (< SYMB >)+ >| < #SYMB : [ "a"-"z" , "A"-"Z" , "1"-"9" , "-" , ".", "/" ] >}SExpr SEXPR () :{  SExpr se;}{  	< COT > se=SEXPR()  	{    	return new SCons(new Symbol("quote"), new SCons(se, Nil.NIL));  	}|
 	se=ATOME()  	{   		return se;  	}|
 	< PO > se=DEB_LIST()	{
 		return se;	}}
