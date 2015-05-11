@@ -27,6 +27,7 @@ import ricm.aoo.lvm.primit.Quit;
 import ricm.aoo.lvm.primit.Scope;
 import ricm.aoo.lvm.primit.Set;
 import ricm.aoo.lvm.primit.TopLevel;
+import ricm.aoo.lvm.primit.Typefn;
 
 public class LVM {
 
@@ -75,6 +76,7 @@ public class LVM {
 		wContext.addToContextGeneral(new Symbol("scope"), new Scope());
 		wContext.addToContextGeneral(new Symbol("set"), new Set());
 		wContext.addToContextGeneral(new Symbol("toplevel"), new TopLevel());
+		wContext.addToContextGeneral(new Symbol("typefn"), new Typefn());
 
 		return wMachine;
 	}
