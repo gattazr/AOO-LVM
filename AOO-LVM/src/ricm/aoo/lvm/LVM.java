@@ -14,6 +14,7 @@ import ricm.aoo.lvm.primit.Eq;
 import ricm.aoo.lvm.primit.Eval;
 import ricm.aoo.lvm.primit.Explode;
 import ricm.aoo.lvm.primit.Implode;
+import ricm.aoo.lvm.primit.List;
 import ricm.aoo.lvm.primit.Load;
 import ricm.aoo.lvm.primit.Print;
 import ricm.aoo.lvm.primit.Quit;
@@ -57,6 +58,7 @@ public class LVM {
 		wContext.addToContextGeneral(new Symbol("eval"), new Eval());
 		wContext.addToContextGeneral(new Symbol("explode"), new Explode());
 		wContext.addToContextGeneral(new Symbol("implode"), new Implode());
+		wContext.addToContextGeneral(new Symbol("list"), new List());
 		wContext.addToContextGeneral(new Symbol("load"), new Load());
 		wContext.addToContextGeneral(new Symbol("print"), new Print());
 		wContext.addToContextGeneral(new Symbol("quit"), new Quit());
