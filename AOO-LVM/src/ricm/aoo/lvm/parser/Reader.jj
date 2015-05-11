@@ -1,7 +1,8 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{  DEBUG_PARSER = true;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm;
+ */options{  DEBUG_PARSER = true;  STATIC = false;}PARSER_BEGIN(Reader)package ricm.aoo.lvm.parser;
 
+import ricm.aoo.lvm.LVMException;
 import ricm.aoo.lvm.kernel.*;
 import java.io.*;
 

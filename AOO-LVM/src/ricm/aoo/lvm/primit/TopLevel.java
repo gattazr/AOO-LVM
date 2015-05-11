@@ -3,9 +3,9 @@ package ricm.aoo.lvm.primit;
 import ricm.aoo.lvm.Console;
 import ricm.aoo.lvm.LVMException;
 import ricm.aoo.lvm.MachineLISP;
-import ricm.aoo.lvm.Reader;
 import ricm.aoo.lvm.kernel.SExpr;
 import ricm.aoo.lvm.kernel.Subr;
+import ricm.aoo.lvm.parser.Reader;
 
 public class TopLevel extends Subr {
 

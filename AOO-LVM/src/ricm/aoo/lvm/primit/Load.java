@@ -9,11 +9,11 @@ import java.io.IOException;
 import ricm.aoo.lvm.Console;
 import ricm.aoo.lvm.LVMException;
 import ricm.aoo.lvm.MachineLISP;
-import ricm.aoo.lvm.Reader;
 import ricm.aoo.lvm.kernel.Nil;
 import ricm.aoo.lvm.kernel.SExpr;
 import ricm.aoo.lvm.kernel.Subr;
 import ricm.aoo.lvm.kernel.Symbol;
+import ricm.aoo.lvm.parser.Reader;
 
 public class Load extends Subr {
 
