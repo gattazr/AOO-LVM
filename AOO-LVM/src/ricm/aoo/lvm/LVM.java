@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import ricm.aoo.lvm.kernel.Symbol;
+import ricm.aoo.lvm.parser.Reader;
 import ricm.aoo.lvm.primit.Apply;
 import ricm.aoo.lvm.primit.Atom;
 import ricm.aoo.lvm.primit.Car;
@@ -35,8 +36,8 @@ public class LVM {
 		LVM wLVM = new LVM();
 		MachineLISP wMachineLISP = wLVM.initEnv();
 		try {
-			/* Charge quelques fonctions classiques */
-			Reader.read("(load ressources/lisp.txt)").eval(wMachineLISP);
+			/* Définit la fonction quote indispensable pour le parser */
+			Reader.read("(df quote (a) a)").eval(wMachineLISP);
 			if (aArgs.length > 0) {
 				wLVM.readFiles(wMachineLISP, aArgs);
 			} else {
