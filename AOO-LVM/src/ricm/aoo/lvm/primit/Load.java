@@ -1,6 +1,7 @@
 package ricm.aoo.lvm.primit;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -33,14 +34,16 @@ public class Load extends Subr {
 		SExpr wReturn = new Symbol("T");
 		BufferedReader wBuffer = null;
 		try {
-			String wLine;
 			wBuffer = new BufferedReader(new FileReader(wFileName));
+			Reader wReader = new Reader(wBuffer);
 
 			/* eval toutes les lignes du fichier */
-			while ((wLine = wBuffer.readLine()) != null) {
-				Reader.read(wLine).eval(aMachineLisp);
+			while (true) {
+				Reader.importe(wReader).eval(aMachineLisp);
 			}
 
+		} catch (EOFException aException) {
+			/* Le fichier a été lu */
 		} catch (IOException aException) {
 			Console.printStack(aException);
 			System.err.println(String.format(
@@ -49,7 +52,7 @@ public class Load extends Subr {
 			wReturn = Nil.NIL;
 		} catch (LVMException wException) {
 			Console.printStack(wException);
-			/* Présente l'erreur et arète l'éxécution du fichier */
+			/* Présente l'erreur et arrête l'éxécution du fichier */
 			Console.println(wException.getMessage());
 			wReturn = Nil.NIL;
 		} finally {

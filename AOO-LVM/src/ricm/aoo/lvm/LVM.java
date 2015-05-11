@@ -27,7 +27,7 @@ public class LVM {
 		LVM wLVM = new LVM();
 		MachineLISP wMachineLISP = wLVM.initEnv();
 		try {
-			/* Charge quelques */
+			/* Charge quelques fonctions classiques */
 			Reader.read("(load ressources/lisp.txt)").eval(wMachineLISP);
 			Reader.read("(toplevel)").eval(wMachineLISP);
 		} catch (LVMException aException) {
