@@ -1,5 +1,11 @@
 package ricm.aoo.lvm;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import ricm.aoo.lvm.kernel.Symbol;
 import ricm.aoo.lvm.primit.Apply;
 import ricm.aoo.lvm.primit.Atom;
@@ -30,7 +36,11 @@ public class LVM {
 		try {
 			/* Charge quelques fonctions classiques */
 			Reader.read("(load ressources/lisp.txt)").eval(wMachineLISP);
-			Reader.read("(toplevel)").eval(wMachineLISP);
+			if (aArgs.length > 0) {
+				wLVM.readFiles(wMachineLISP, aArgs);
+			} else {
+				Reader.read("(toplevel)").eval(wMachineLISP);
+			}
 		} catch (LVMException aException) {
 			Console.println(aException.getMessage());
 			Console.printStack(aException);
@@ -73,4 +83,45 @@ public class LVM {
 		Console.println("Goodbye");
 	}
 
+	public void readFiles(MachineLISP aMachineLisp, String[] aFileNames)
+			throws LVMException {
+		for (String wFileName : aFileNames) {
+			if (!(new File(wFileName).isFile())) {
+				throw new LVMException(String.format("*** - file %s not found",
+						wFileName));
+			}
+			BufferedReader wBuffer = null;
+			try {
+				wBuffer = new BufferedReader(new FileReader(wFileName));
+
+				Reader wReader = new Reader(wBuffer);
+
+				/* eval toutes les lignes du fichier */
+				while (true) {
+					Console.println(Reader.importe(wReader).eval(aMachineLisp)
+							.toString());
+				}
+
+			} catch (EOFException aException) {
+				/* Le fichier a été lu */
+			} catch (IOException aException) {
+				Console.printStack(aException);
+				System.err.println(String
+						.format("*** - Reading the file %s created an error",
+								wFileName));
+			} catch (LVMException wException) {
+				Console.printStack(wException);
+				/* Présente l'erreur et arrête l'éxécution du fichier */
+				Console.println(wException.getMessage());
+			} finally {
+				try {
+					if (wBuffer != null) {
+						wBuffer.close();
+					}
+				} catch (IOException aException) {
+					Console.printStack(aException);
+				}
+			}
+		}
+	}
 }

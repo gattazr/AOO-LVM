@@ -1,6 +1,6 @@
 (DF QUOTE (B) B)
 (DE FALSE () ())
-(DE TRUE () R)
+(DE TRUE () T)
 (DE NULL (L) (EQ L NIL))
 (DE NOT (A) (COND (A NIL) (T T)))
 (DE ATOMP (A) (ATOM A))

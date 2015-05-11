@@ -1,0 +1,3 @@
+(car (cdr '(A B) ) )
+(false)
+(true)
