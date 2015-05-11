@@ -19,7 +19,6 @@ public class Reader{
   			catch (Exception e){
 				System.out.println("NOK.");
 				System.out.println(e.getMessage());
-				//Reader.ReInit(System.in);
 			}
 			catch (Error e){
 				System.out.println("Oops.");
