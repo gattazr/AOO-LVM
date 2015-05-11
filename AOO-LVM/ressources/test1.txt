@@ -1,3 +1,9 @@
-(car (cdr '(A B) ) )
-(false)
-(true)
+// Charge des fonctions usuelles
+(load 'lisp.txt)
+
+(car (cdr '(R I C M) ) ) // Retourne I
+(print 'Wow) // Affiche wow et retourne WOW (affiché aussi)
+(list 'A) // Retourne (A)
+(atomp 'A) // Retourne T
+(eq (atomp 'A) NIL) // Retourne Nil
+(eq (atomp (list'A)) NIL) // Retourne T

@@ -47,6 +47,9 @@ public class LVM {
 			Console.println(aException.getMessage());
 			Console.printStack(aException);
 		}
+		/* Le programme ne termine pas si on ne force la fermeture. */
+		/* Nous ne comprenons pas pourquoi */
+		System.exit(0);
 	}
 
 	public LVM() {
