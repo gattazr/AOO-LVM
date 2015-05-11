@@ -147,8 +147,8 @@
   </class>  
   <class id="17" language="java" name="ricm.aoo.lvm.LVM" project="AOO-LVM" file="/AOO-LVM/src/ricm/aoo/lvm/LVM.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="984" y="65"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="134" width="167" x="164" y="-15"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
