@@ -1,0 +1,282 @@
+\documentclass[a4paper, 11pt]{article}
+
+% language and accents
+%\usepackage[UKenglish]{babel}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{.8em}	%On aère la table des matières
+%\usepackage[T1]{fontenc}
+
+%% set up
+\usepackage[hmargin=3cm, vmargin=3cm]{geometry}
+
+%% verbatim
+\usepackage{moreverb}
+
+%%code
+\usepackage{listings}
+
+%% figures
+\usepackage{graphicx}
+\usepackage{float}
+\DeclareGraphicsExtensions{.jpg, .mps, .pdf, .png, .eps, .ps}
+\usepackage{subfigure}
+\usepackage{sidecap}
+\usepackage{wrapfig}
+
+%% colors
+\usepackage[usenames]{color}
+\usepackage[x11names,rgb]{xcolor}
+
+%% tikz
+\usepackage{tikz}
+\usetikzlibrary{snakes}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{backgrounds}
+
+%% maths
+\usepackage{amsmath, amsthm, amssymb}
+\numberwithin{equation}{section}
+
+%% commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\minip}[2]{\begin{minipage}[c]{#1\linewidth} #2 \end{minipage}}
+
+%% theorems
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{rmk}[thm]{Remark}
+\theoremstyle{definition}
+
+
+%% pdf
+\usepackage[
+  pdftex,
+  bookmarks=true,
+  bookmarksnumbered=true,
+  breaklinks=true,
+  backref=page,
+  pagebackref=true,
+  pdfauthor={Quentin DUNAND}, % Pas possible de mettre plusieurs auteurs à un pdf ?
+  pdftitle={CR_POO_DUNAND_GATTAZ_HABLOT_NAVARRO},
+  pdfsubject={POO},
+  pdfkeywords={e},
+  colorlinks=true,
+  linkcolor=blue!80!black,
+  urlcolor=red!60,
+  citecolor=green!80!black]{hyperref}
+%\usepackage[all]{hypcap}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+
+\lstset{ %
+language=Java,                % choose the language of the code
+basicstyle=\footnotesize, %
+identifierstyle=\color{red}, %
+keywordstyle=\color{blue}, %
+stringstyle=\color{black!60}, %
+commentstyle=\color{blue!20!black!30!green}, %
+columns=flexible, %
+tabsize=2, %
+extendedchars=true, %
+showspaces=false, %
+showstringspaces=false, %
+numbers=left, %
+numberstyle=\tiny, %
+breaklines=true, %
+breakautoindent=true, %
+captionpos=b,
+frame=single,
+extendedchars=true,
+literate={é}{{\'e}}1 {è}{{\`e}}1 {à}{{\`a}}1 {ç}{{\c{c}}}1 {œ}{{\oe}}1 {ù}{{\`u}}1 {É}{{\'E}}1 {È}{{\`E}}1 {À}{{\`A}}1 {Ç}{{\c{C}}}1 {Œ}{{\OE}}1 {Ê}{{\^E}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+}
+
+\title {\Huge Compte-Rendu Projet POO \\ Interpréteur LISP}
+\author{Quentin Dunand \and Rémi Gattaz \and Jules Hablot \and Elsa Navarro}
+\date{\today}
+\vspace{15 mm}
+
+\begin{document}
+
+\maketitle	
+
+\vspace*{3cm}
+
+\begin{figure}[!hcb]
+	\includegraphics[scale=2.7]{Illustration/Logo_polytech}
+\end{figure}
+
+\clearpage
+
+\hrule
+\tableofcontents
+\vspace*{5mm}
+\hrule
+
+\newpage
+
+
+\section{Présentation du sujet}
+
+Ce projet a été réalisé dans le cadre de la mise en pratique de nos connaissances en programmation orienté objet grâce au langage {\bfseries JAVA}.
+
+Il consiste à réaliser une modélisation objet en utilisant un interpréteur pour le langage {\bfseries LISP} en langage {\bfseries JAVA}. Le but est de concevoir un programme structuré mettant en évidence les concepts majeurs ainsi que d'élaborer un programme qui peut évoluer dans le temps.
+
+  
+%%%%%%%%%%%%%%%%%
+%Première partie%
+%%%%%%%%%%%%%%%%%
+\section{Récapitulatif rapide}
+
+Dans le cadre de ce projet, voici une liste de toutes les fonctionnalités que nous avons développées :
+\begin{itemize}
+	\item Lecture d'une expression LISP à l'aide un parser javaCC
+	\item Lecture d'une expression LISP à partir d'une String
+	\item Lecture d'une expression LISP à partir d'un Buffer sur un fichier
+	\item Évaluation d'expressions LISP en mode interactif
+	\item Évaluation d'expressions LISP depuis un fichier
+\end{itemize}
+\vspace{3 mm}
+
+Pour permettre l'évaluation d'expressions LISP, voici alors les différentes primitives qui ont été mises en place :
+\begin{multicols}{2}
+	\begin{itemize}
+		\item Apply
+		\item Atom
+		\item Car
+		\item Cdr
+		\item Cond
+		\item Cons
+		\item De
+		\item Df
+		\item Eprogn
+		\item Eq
+		\item Eval
+		\item Explode
+		\item Implode
+		\item List
+		\item Load
+		\item Print
+		\item Quit
+		\item Scope
+		\item Set
+		\item Toplevel
+		\item Typefn
+	\end{itemize}
+\end{multicols}
+\vspace{3 mm}
+
+Il s'agit donc de toutes les primitives qui étaient proposées par le sujet. Nous avons cependant rajouté la primitive {\bfseries List} car nous n'avons pas trouvé de fonction {\bfseries Lambda} ou {\bfseries FLambda} permettant de définir cette fonction.
+
+\section{Plus de détails}
+
+\subsection{Démarrage de l'interpréteur}
+
+\subsubsection{Initialisation de la machine LISP}
+
+Lors de l'initialisation de notre machine LISP, le système rajoute dans le contexte toutes les primitives LISP qui seront reconnues. Il ajoute aussi la fonction {\bfseries FExpr} \textit{"quote"}. Ceci est nécessaire puisque la grammaire que nous avons définie remplace toutes les instructions $'X$ par (\textit{quote X}).%%%%%%
+%TODO%
+%%%%%%
+
+\subsubsection{Ajout de prédicats et fonctions}
+
+Nous avons fait le choix de proposer un environnement de départ minimal. Avec la primitive {\bfseries Load}, il est cependant très facile de charger un grand nombre de fonction usuelles. Le fichier ressources/lisp.txt contient quelques exemples de prédicats et fonctions classiques.
+%%%%%%
+%TODO%
+%%%%%%
+
+\subsubsection{Lancement de la primitive Toplevel}
+
+Finalement, le lancement de notre interpréteur se traduit concrètement par l'appel de la primitive {\bfseries Toplevel} qui permet d'interpréter des instructions LISP. Cette primitive effectue une boucle infinie et évalue toutes les SExpr rentrées par l'utilisateur. C'est l'appel à la primitive \textit{quit} qui permet alors de quitter l'application.
+%%%%%%
+%TODO%
+%%%%%%
+
+\subsection{Évaluation des SExpr}
+
+Voici quelques choix que nous avons fais pour l'évaluation des SExpr.
+
+Comme indiqué précédemment, nous avons défini une classe MachineLisp. Contenant le contexte de la LVM, cet objet est transmis à toutes les étapes de l'évaluation d'une SExpr. Cette objet ne contient à l'heure actuelle qu'un contexte. On peut donc penser que remplacer cet object directement par l'objet représentant notre Contexte est possible. Cependant, ce choix avait été fait dans l'optique d'une évolution de cette application. C'est également dans cette optique que nous avons décidé de ne pas définir cet object comme une "variable globale" de notre application mais de la passer à chaque fonction.
+
+
+Nous avions définis que quelque soit la liste, la première étape de l'évaluation d'une {\bfseries SCons} était l'évaluation du foncteur. C'est cependant faux car la gestion des Lambdas implique forcément une exception. En effet, nous voyons que dans le cas ou le premier élément de la {\bfseries SCons} est un symbole lié à une fonction dans le contexte, la symbole est remplacé par un expression lambda. Or, si l'on définit une SExpr à évaluer qui contient directement une expression lambda, avant l"évaluation du premier élément de cette liste, on y trouvera alors une expression lambda. Évaluer cet élément créerait donc une erreur. Avant d'évaluer le premier élément d'une SCons afin de récupérer le foncteur, il faut donc vérifier qu'il ne s'agit pas déjà d'une expression lambda qui dans ce cas impliquera que le premier élément de la liste est déjà le foncteur.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Précision sur le Contexte}
+
+Le contexte est l'élément qui permet de faire la liaison entre les {\bfseries Symboles} et les {\bfseries SExpr}.\newline
+Un symbole LISP peut être différents objets : (les derniers cas ne sont finalement que des cas de listes particulières)\newline
+\begin{itemize}
+	\item une \textit{primitive},
+	\item un \textit{symbole},
+	\item une \textit{liste},
+	\item une \textit{lambda},
+	\item une \textit{flambda}.
+	\newline
+\end{itemize}
+Toutes les classes que nous avons définies afin de construire des {\bfseries SExpr} proposent des objets immuables. C'est à dire qu'ils sont donc impossibles à modifier. Quoi que l'on ajoute dans le contexte, nous savons donc que sa valeur ne sera pas modifiée. Cela permet d'apporter une certaine robustesse à notre application. De plus, cette caractéristique est très intéressante et utile pour la recherche dans le contexte par exemple. Il n'est plus nécessaire de se demander comment manipuler les données du contexte de façon sûre (pas de copie à faire si on a accès à un élément du contexte par exemple) car il est impossible de modifier et donc altérer les données qui y sont présentes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cas particulier des SCons}
+
+Les {\bfseries SCons} nécessitent un traitement spécifique qui diffère des autres cas, c'est pourquoi nous avons décidé de nous attarder dessus.
+
+En effet, lors de l'évaluation d'une {\bfseries SCons}, plusieurs traitements sont effectués selon les différents cas. 
+Dans un premier temps, on évalue le premier élément de la liste. Ce premier élément est essentiel pour la suite : c'est le foncteur.
+Selon le foncteur que l'on obtient, notre traitement sera différent :
+\begin{itemize}
+	\item Si c'est une primitive, il suffit d'exécuter celle-ci.
+	\item Si il s'agit d'une liste, on va vérifier si il s'agit d'une liste contenant une fonction {\bfseries Lambda} ou {\bfseries FLambda}. Si c'est le cas, elle sera exécuté.
+	\item Sinon, il ne s'agit pas d'une fonction et donc il s'agit d'une erreur.
+	\newline
+\end{itemize}
+
+L'interface {\bfseries Foncteur}, héritée à la fois par la classe {\bfseries Primitives} et la classe {\bfseries Fonction}, possède une fonction \textit{exec} qui prend en paramètre une {\bfseries machineLISP} (qui ne contient que le contexte pour le moment comme nous l'avons expliqué plus tôt) et une {\bfseries SExpr} qui représente la liste des arguments de la fonction.
+
+C'est dans la gestion de la primitive ou de la fonction que l'on va décider d'évaluer ou non le contenu de cette {\bfseries SExpr}. 
+
+Suivant si la primitive ou fonction est une {\bfseries Subr} ou une {\bfseries FSubr} ou une {\bfseries Lambda} ou une {\bfseries FLambda}, l'évaluation des paramètres est effectué ou non. Dans le cas ou elle est nécessaire, chaque élément de la liste de paramètre est alors évalué individuellement.
+
+\subsection{Quote}
+
+Au début de ce projet, lorsque nous arrivions à effectuer quelques primitives simples, nous avions défini la primitive {\bfseries Quote}. Cependant, lorsque nous avons commencé à évaluer des {\bfseries Lambda} et des {\bfseries FLambda}, nous nous sommes rendu compte que cette primitive n'était pas nécessaire. En effet, il est très facile de définir la fonction {\bfseries Quote} avec une {\bfseries FLambda}.
+
+Nous avons donc enlevé cette primitive de notre ensemble. Mais notre parser nécessite cette fonction. En effet, il transforme toutes les {\bfseries SExpr} de la forme 'A en (QUOTE A). Il fallait donc, quoi qu'il arrive, que la fonction QUOTE soit définie. Pour ce faire, avant l'appel à la primitive {\bfseries toplevel}, nous avons donc effectué l'évaluation d'une chaîne de caractère définissant cette fonction.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reader}
+
+Notre objet \textit{Reader} permet de lire une {\bfseries SExpr} à partir de trois entrées différentes. Ces trois méthodes ont chacune un lecteur prenant leurs entrées sur des flux de différentes natures. Nous ne faisons aucune évaluation au sein de notre {\bfseries Parser}, elles sont toutes faites ailleurs car son seul rôle et de lire des {\bfseries SExpr}.
+
+Nous avons géré le flux de l'\textit{entrée standard} : le clavier. Chaque expression lue doit finir par un retour à la ligne. Nous avons aussi une fonction qui lit une \textit{String} par le même procédé. Enfin nous avons aussi permit à notre application de lire des {\bfseries SExpr} par le biais d'un \textit{fichier}. Néanmoins ce n'est pas le \textit{Reader} qui ouvre et ferme le fichier. Pour cette dernière méthode nous lui donnons un \textit{Reader} en paramètre.
+
+Notre grammaire est de plus classique. Il s'agit d'une grammaire synthétisée, c'est dire que pour chaque composante elle retourne un résultat qui est traité plus haut dans la structure de la grammaire. Nous avons défini des {\bfseries Tokens} avec une simplicité évidente car nous pouvions utiliser des expressions régulières comprenant l'opérateur "+" et "*". Pour la définition de la grammaire, il est parfois facile d'utiliser aussi des expressions régulières mais JavaCC ne veut pas, nous avons donc du expliciter ces opérateurs, ce qui alourdie notre grammaire. 
+
+Nous avons la possibilité de faire des affichages pour débuger notre grammaire. Ceci nous à particulière était utile au début pour vérifier que les appels se faisaient bien dans les bonnes catégories du {\bfseries Parser}.
+
+La gestion des erreurs est faite dans les méthodes du {\bfseries Parser}. Lorsqu'une erreur au niveau de la grammaire est levée, nous la capturons pour en renvoyer une autre d'un type défini par nos soins. Pour le cas d'\textit{importe}, nous avons du inclure la gestion de la fin de fichier qui pouvait causer des problèmes.
+
+%%%%%%%%%%%%%%%%%
+%Deuxième partie%
+%%%%%%%%%%%%%%%%%
+\section{Problèmes rencontrés}
+
+\subsection{SExpr incomplète}
+
+Lors de la lecture d'un fichier par notre interpréteur, la lecture d'une {\bfseries SExpr} incomplète peut poser problème. Le parseur consume le fichier jusqu’à ce qu'il ait pu lire une {\bfseries SExpr} complète ou atteindre la fin du fichier. Dans le cas ou une {\bfseries SExpr} est mal formé et qu'il y a un problème de parenthésage, c'est à dire qu'il y a un eu plus de parenthèse ouvrante que fermante, alors le parseur va potentiellement consumer tous le reste du fichier.
+
+De plus, nous n'avons pas trouvé de moyen de remonter l'information comme quoi une {\bfseries SExpr} était en cours de lecture. Lorsque le caractère 'EOF' est trouvé, le parseur remonte alors une Exception et la {\bfseries SExpr} qui avait été crée avec ce qui était lu est perdue. Nous ne détectons donc pas cette erreur.
+
+\subsection{Terminaison}
+
+Avec l'implémentation de la lecture de fichier plutôt que System.in, nous nous sommes confrontés à un problème que nous n'avons pas su expliquer.
+
+Malgré le fait que le fil d'exécution montre bien que le programme sorte de la fonction main, et se dirige vers exit, afin de terminer le programme, le programme ne se termine pas lorsque nous lisons un fichier.
+
+Pour remédier à ce problème, nous avons donc rajouté l'instruction System.exit(0); comme dernière instruction de la fonction main().
+
+\end{document}
